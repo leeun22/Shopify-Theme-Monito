@@ -1,0 +1,62 @@
+{
+    "sections": {
+        "images_banner": {
+            "type": "background-images-banner",
+            "blocks": {
+                "heading": {
+                    "type": "heading",
+                    "settings": {
+                        "heading_banner": "One more friend",
+                        "heading_banner_size": "h1"
+                    }
+                },
+                "subheading": {
+                    "type": "subheading",
+                    "settings": {
+                        "subheading_banner": "Thousands more fun!",
+                        "subheading_style_banner": "body:"
+                    }
+                },
+                "text": {
+                    "type": "text",
+                    "settings": {
+                        "text_banner": "Having a pet means you have more joy, a new friend, a happy person who will always be with you to have fun. We have 200+ different pets that can meet your needs!",
+                        "text_style_banner": "body"
+                    }
+                },
+                "buttons": {
+                    "type": "buttons",
+                    "settings": {
+                        "button_banner_1": "View Intro",
+                        "button_link_1": "",
+                        "button_banner_style_1": true,
+                        "button_banner_2": "Explore Now",
+                        "button_link_2": "",
+                        "button_banner_style_2": false
+                    }
+                }
+            },
+            "block_order": [
+                "heading",
+                "subheading",
+                "text",
+                "buttons"
+            ]
+        },
+        "featured_collection": {
+            "type": "featured-collection",
+            "settings": {
+                "heading_product_collection": "Product collection",
+                "subheading_product_collection": "Whats new?",
+                "button_label_featured_collection": "View more",
+                "button_featured_collection_style": true,
+                "button_label_cart_collection": "Free Toy & Free Shaker"
+            }
+        }
+
+    },
+    "order": [
+        "images_banner",
+        "featured_collection"
+    ]
+}

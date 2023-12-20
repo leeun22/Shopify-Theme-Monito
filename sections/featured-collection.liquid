@@ -1,0 +1,305 @@
+{% comment %} {% assign selectedCollectionID = section.settings.selected_collection %} {% endcomment %}
+{% comment %} {% assign selectedCollection = collections[selectedCollectionID] %} {% endcomment %}
+
+<div class="section--card-product">
+    <div class="container container-product-list">
+        <div class="section-header d-flex f-wrap jc-space-between alt-center">
+            <div class="section-heading">
+                {%- if section.settings.subheading_featured_collection != blank -%}
+                    <span class="subheading primary-text secondary-text-mobile">
+                        {{- section.settings.subheading_featured_collection -}}
+                    </span>
+                {%- endif -%}
+                
+                {%- if section.settings.heading_featured_collection != blank -%}
+                    <h2 class="heading heading-small heading-small-mobile c-pointer"> <a href="{{ section.settings.selected_collection.url }}">{{- section.settings.heading_featured_collection -}}</a> </h2>
+                    {%- else -%}
+                        <h2 class="heading heading-small heading-small-mobile c-pointer"> 
+                            {{- section.settings.selected_collection.title | link_to: section.settings.selected_collection.url }}
+                        </h2>
+                {%- endif -%}
+            </div>
+
+            {%- if section.settings.button_label_featured_collection != blank -%}
+                <div class="section-header__view-more d-inline-flex d-none-mb581">
+                    <a {% if section.settings.button_link_featured_collection != blank %} href="{{ section.settings.button_link_featured_collection }}" {% else %} role="link" aria-disabled="true" {%- endif -%} class="button d-flex jc-center alt-center {%- if section.settings.button_featured_collection_style %} button--outline {% else %} button--primary {%- endif -%}">
+                        <span class="secondary-text primary-text-mobile"> {{- section.settings.button_label_featured_collection -}} </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M8.33398 6.66669L11.6673 10L8.33398 13.3334" stroke="#003459" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            {%- endif -%}
+        </div>
+
+        <div class="section--card">
+            <div class="grid d-flex f-wrap">
+                {%- if section.settings.selected_collection != blank -%}
+                    {%- for product in section.settings.selected_collection.products -%}
+                        <div class="grid__item grid__item_product d-flex o-hidden">
+                            {% render 'card-product',
+                                card_product: product,
+                                show_cart_btn: section.settings.show_button_cart
+                            %}
+                        </div>
+                    {%- endfor -%}
+
+                {%- else -%}
+
+                    <div class="grid__item grid__item_product d-flex o-hidden">
+                        <div class="card card-product d-grid">
+                            <div class="card__media card__media-product o-hidden c-pointer">
+                                {{ 'product-apparel-1' | placeholder_svg_tag: 'product-placeholder-svg' }}
+                            </div>
+                    
+                            <div class="card-body card-body-product">
+                                <h3 class="card-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#"> Example product title </a>
+                                </h3>
+                    
+                                <div class="product-info d-flex jc-start alt-center">                                   
+                                    <div class="product-info-title">
+                                        <span class="pro-font-light">Gene:</span>
+                                        <span class="product-info-title-bold">Male</span>
+                                    </div>
+                    
+                                    <span class="dot-grey d-none-mb581"></span>
+                    
+                                    <div class="product-info-attribute">
+                                        <span class="pro-font-light">Age:</span>
+                                        <span class="product-info-att-bold">02 months</span>
+                                    </div>
+                                </div>                                 
+                    
+                                <div class="text-content-main secondary-text primary-text-mobile">
+                                    2.000.000 VND
+                                </div>
+                    
+                                {%- if section.settings.show_button_cart == true -%}
+                                    <button type="button" class="product-gift d-flex alt-center c-pointer b-none">
+                                        {{ 'image' | placeholder_svg_tag: 'img-product-gift' }}
+                                        <span class="dot-blue"></span>
+                                        <span class="cont-gift"> Add to cart </span>
+                                    </button>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item grid__item_product d-flex o-hidden">
+                        <div class="card card-product d-grid">
+                            <div class="card__media card__media-product o-hidden c-pointer">
+                                {{ 'product-apparel-2' | placeholder_svg_tag: 'product-placeholder-svg' }}
+                            </div>
+                    
+                            <div class="card-body card-body-product">
+                                <h3 class="card-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#"> Example product title </a>
+                                </h3>
+                    
+                                <div class="product-info d-flex jc-start alt-center">                                   
+                                    <div class="product-info-title">
+                                        <span class="pro-font-light">Gene:</span>
+                                        <span class="product-info-title-bold">Male</span>
+                                    </div>
+                    
+                                    <span class="dot-grey d-none-mb581"></span>
+                    
+                                    <div class="product-info-attribute">
+                                        <span class="pro-font-light">Age:</span>
+                                        <span class="product-info-att-bold">02 months</span>
+                                    </div>
+                                </div>                                 
+                    
+                                <div class="text-content-main secondary-text primary-text-mobile">
+                                    2.000.000 VND
+                                </div>
+                    
+                                {%- if section.settings.show_button_cart == true -%}
+                                    <button type="button" class="product-gift d-flex alt-center c-pointer b-none">
+                                        {{ 'image' | placeholder_svg_tag: 'img-product-gift' }}
+                                        <span class="dot-blue"></span>
+                                        <span class="cont-gift"> Add to cart </span>
+                                    </button>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item grid__item_product d-flex o-hidden">
+                        <div class="card card-product d-grid">
+                            <div class="card__media card__media-product o-hidden c-pointer">
+                                {{ 'product-apparel-3' | placeholder_svg_tag: 'product-placeholder-svg' }}
+                            </div>
+                    
+                            <div class="card-body card-body-product">
+                                <h3 class="card-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#"> Example product title </a>
+                                </h3>
+                    
+                                <div class="product-info d-flex jc-start alt-center">                                   
+                                    <div class="product-info-title">
+                                        <span class="pro-font-light">Gene:</span>
+                                        <span class="product-info-title-bold">Male</span>
+                                    </div>
+                    
+                                    <span class="dot-grey d-none-mb581"></span>
+                    
+                                    <div class="product-info-attribute">
+                                        <span class="pro-font-light">Age:</span>
+                                        <span class="product-info-att-bold">02 months</span>
+                                    </div>
+                                </div>                                 
+                    
+                                <div class="text-content-main secondary-text primary-text-mobile">
+                                    2.000.000 VND
+                                </div>
+                    
+                                {%- if section.settings.show_button_cart == true -%}
+                                    <button type="button" class="product-gift d-flex alt-center c-pointer b-none">
+                                        {{ 'image' | placeholder_svg_tag: 'img-product-gift' }}
+                                        <span class="dot-blue"></span>
+                                        <span class="cont-gift"> Add to cart </span>
+                                    </button>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item grid__item_product d-flex o-hidden">
+                        <div class="card card-product d-grid">
+                            <div class="card__media card__media-product o-hidden c-pointer">
+                                {{ 'product-apparel-4' | placeholder_svg_tag: 'product-placeholder-svg' }}
+                            </div>
+                    
+                            <div class="card-body card-body-product">
+                                <h3 class="card-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#"> Example product title </a>
+                                </h3>
+                    
+                                <div class="product-info d-flex jc-start alt-center">                                   
+                                    <div class="product-info-title">
+                                        <span class="pro-font-light">Gene:</span>
+                                        <span class="product-info-title-bold">Male</span>
+                                    </div>
+                    
+                                    <span class="dot-grey d-none-mb581"></span>
+                    
+                                    <div class="product-info-attribute">
+                                        <span class="pro-font-light">Age:</span>
+                                        <span class="product-info-att-bold">02 months</span>
+                                    </div>
+                                </div>                                 
+                    
+                                <div class="text-content-main secondary-text primary-text-mobile">
+                                    2.000.000 VND
+                                </div>
+                    
+                                {%- if section.settings.show_button_cart == true -%}
+                                    <button type="button" class="product-gift d-flex alt-center c-pointer b-none">
+                                        {{ 'image' | placeholder_svg_tag: 'img-product-gift' }}
+                                        <span class="dot-blue"></span>
+                                        <span class="cont-gift"> Add to cart </span>
+                                    </button>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+
+        <!-- Button view-more-mobile -->
+        {%- if section.settings.button_label_featured_collection != blank -%}
+            <div class="section-header__view-more section-header__view-more-mobile d-none jc-center">
+                <a {% if section.settings.button_link_featured_collection == blank %} role="link" aria-disabled="true" {% else %} href="{{ block.settings.button_link_featured_collection }}" {%- endif -%} class="button d-flex jc-center alt-center {%- if section.settings.button_featured_collection_style %} button--outline {% else %} button--primary {%- endif -%}">
+                    <span>{{- section.settings.button_label_featured_collection -}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M8.33398 6.66669L11.6673 10L8.33398 13.3334" stroke="#003459" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        {%- endif -%}
+
+    </div>
+</div>
+
+{% schema %} 
+    {    
+        "name": "Featured collection",
+        "tag": "section",
+        "disabled_on": {
+            "groups": ["header", "footer"]
+        },
+        "settings": [
+            {
+                "type": "inline_richtext",
+                "id": "subheading_featured_collection",
+                "default": "Whats new?",
+                "label": "Subheading"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "heading_featured_collection",
+                "default": "Take a look at some of our pets",
+                "label": "Heading"
+            },
+            {
+                "type": "collection",
+                "id": "selected_collection",
+                "label": "Collection"
+            },
+            {
+                "type": "header",
+                "content": "Button"
+            },
+            {
+                "type": "text",
+                "id": "button_label_featured_collection",
+                "label": "Button label",
+                "default": "View more",
+                "info": "Leave the label blank to hide the button."
+            },
+            {
+                "type": "url",
+                "id": "button_link_featured_collection",
+                "label": "Button link"
+            },
+            {
+                "type": "checkbox",
+                "id": "button_featured_collection_style",
+                "default": true,
+                "label": "Use outline button style"
+            },
+            {
+                "type": "header",
+                "content": "Cart"
+            },
+            {
+                "type": "text",
+                "id": "button_label_cart_collection",
+                "label": "Button label",
+                "default": "Free Toy & Free Shaker",
+                "info": "Leave the label blank to hide the button."
+            },
+            {
+                "type": "checkbox",
+                "id": "show_button_cart",
+                "default": false,
+                "label": "Show cart button"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_image",
+                "label": "Image icon"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Featured collection"
+            }
+        ]
+    }
+{% endschema %}

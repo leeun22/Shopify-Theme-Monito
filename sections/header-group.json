@@ -1,0 +1,20 @@
+{
+    "name": "Header",
+    "type": "header",
+    "sections": {
+        "header": {
+            "type": "header",
+            "settings": {
+                "Button label": "Join the community",
+                "input_search": "Search something here!",
+                "show_search": true,
+                "menu-header": "main-menu",
+                "enable_country_selector": true,
+                "button_header_style": false
+            }
+        }
+    },
+    "order": [
+        "header"
+    ]
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" href="{{ 'fonts.css' | asset_url }}" rel="stylesheet">
+        <link type="text/css" href="{{ 'helper.css' | asset_url }}" rel="stylesheet">
+        <link type="text/css" href="{{ 'style.css' | asset_url }}" rel="stylesheet">
+        <link type="text/css" href="{{ 'layout.css' | asset_url }}" rel="stylesheet">
+        <script src="{{ 'library.js' | asset_url }}" defer="defer"></script>
+        <title>{{ shop.name }}</title>
+      
+        {{ content_for_header }}
+    </head>
+
+    <body>
+        {%- sections 'header-group' -%} 
+
+        <main>
+            {{ content_for_layout }}
+        </main>
+
+        {%- sections 'footer-group' -%} 
+    </body>
+</html>

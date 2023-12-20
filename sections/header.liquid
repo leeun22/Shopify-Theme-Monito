@@ -1,0 +1,177 @@
+<div class="section--header-menu d-flex p-absolute z-index-10">
+    <div class="container container--header d-flex jc-space-between alt-center">
+        {% if section.settings.logo != blank %}
+            <div class="logo logo-header c-pointer">
+                <a href="{{ shop.url }}">
+                    {{ section.settings.logo | image_url: width: '250' | image_tag: class: 'img-logo d-block', size: '100vw', widths: '115,250'}} </a>
+                </a>
+            </div>
+        {% else %}
+            <span class="no-logo"> {{ shop.name }} </span>
+        {% endif %}
+
+
+        <div class="menu">
+            <button type="button" class="bar-menu tablet-menu-block d-none b-none" onclick="openNav()"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
+                    <path d="M6.66602 23.1666H25.3327M6.66602 16.4999H25.3327M6.66602 9.83325H25.3327" stroke="#00171F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <nav id="mySidenav" class="sidenav tablet-menu-block">
+                <button type="button" class="closebtn d-none p-absolute b-none" id="btnCloseNav" onclick="closeNav()">&times;</button>
+
+                <ul class="nav__list-menu d-flex o-hidden">
+                    {%- if section.settings.menu-header != blank -%}  
+                        {%- for link in section.settings.menu-header.links -%}
+                            <li class="nav__items-menu"> 
+                                <a href="{{ link.url }}" class="nav__link-menu d-block primary-text"> {{ link.title }} </a> 
+                            </li>
+                        {%- endfor -%}
+                    {%- else -%}
+                        {% for link in linklists.main-menu.links -%}
+                            <li class="nav__items-menu"> 
+                                <a href="{{ link.url }}" class="nav__link-menu d-block primary-text"> {{ link.title }} </a> 
+                            </li>   
+                        {%- endfor %}
+                    {%- endif -%}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header__search d-flex alt-center">
+            {%- if section.settings.show_search -%}
+                <div class="search">
+                    <form class="form__search d-flex alt-center secondary-text" action="#">
+                        <input type="search" {%- if section.settings.input_search != blank -%} placeholder="{{ section.settings.input_search }}" {%- elsif section.settings.input_search == blank -%} placeholder="{{ block.settings.input_search }}" {%- endif -%} name="search" class="input-search secondary-text b-none ol-none d-none-md-desktop">
+
+                        <button type="submit" class="btn-search c-pointer b-none bg-none ol-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M18.0909 16.9083L14.9992 13.8416C16.1993 12.3453 16.7804 10.446 16.6232 8.53434C16.466 6.62267 15.5822 4.84391 14.1538 3.56379C12.7253 2.28368 10.8607 1.59951 8.94329 1.65198C7.02589 1.70445 5.20146 2.48956 3.84514 3.84587C2.48882 5.20219 1.70371 7.02662 1.65125 8.94402C1.59878 10.8614 2.28294 12.7261 3.56306 14.1545C4.84317 15.583 6.62194 16.4667 8.5336 16.6239C10.4453 16.7812 12.3445 16.2 13.8409 14.9999L16.9075 18.0666C16.985 18.1447 17.0772 18.2067 17.1787 18.249C17.2803 18.2913 17.3892 18.3131 17.4992 18.3131C17.6092 18.3131 17.7181 18.2913 17.8197 18.249C17.9212 18.2067 18.0134 18.1447 18.0909 18.0666C18.2411 17.9112 18.325 17.7035 18.325 17.4874C18.325 17.2713 18.2411 17.0636 18.0909 16.9083ZM9.16585 14.9999C8.01213 14.9999 6.88432 14.6578 5.92503 14.0168C4.96574 13.3759 4.21807 12.4648 3.77656 11.3989C3.33505 10.333 3.21953 9.16012 3.44461 8.02856C3.66969 6.89701 4.22526 5.8576 5.04106 5.0418C5.85687 4.22599 6.89627 3.67042 8.02783 3.44534C9.15938 3.22026 10.3323 3.33578 11.3982 3.77729C12.4641 4.2188 13.3751 4.96647 14.0161 5.92576C14.6571 6.88505 14.9992 8.01286 14.9992 9.16659C14.9992 10.7137 14.3846 12.1974 13.2906 13.2914C12.1967 14.3853 10.713 14.9999 9.16585 14.9999Z" fill="#667479"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            {%- endif -%}
+
+            {%- if section.settings.button_label_header != blank -%}
+                <a {% if block.settings.button_link_header == blank %} role="link" aria-disabled="true" {% else %} href="{{ block.settings.button_link_header }}" {%- endif -%} class="button button-header d-none-lg-desktop {%- if section.settings.button_header_style %} button--outline {% else %} button--primary {%- endif -%}">
+                    <span class="button-title"> {{ section.settings.button_label_header }} </span>
+                </a>
+            {%- endif -%}
+
+            {%- if section.settings.enable_country_selector -%}
+                <div class="nation-dropdown d-inline-block p-relative d-none-lg-desktop">
+                    <button type="button" onclick="myFunction()" class="button__dropdown primary-text d-flex alt-center c-pointer b-none bg-none">
+                        <span class="flag">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <g clip-path="url(#clip0_990_1006)">
+                                <path d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="#D80027"/>
+                                <path d="M7.99905 4.17383L8.86242 6.83098H11.6563L9.39598 8.47317L10.2594 11.1304L7.99905 9.48814L5.73873 11.1304L6.60211 8.47317L4.3418 6.83098H7.13567L7.99905 4.17383Z" fill="#FFDA44"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_990_1006">
+                                <rect width="16" height="16" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </span>
+
+                        <span class="currency-title">
+                            VND
+                        </span>
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 11L12 14L9 11" stroke="#002A48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <div id="myDropdown" class="dropdown-content primary-text d-none p-absolute">
+                        <ul class="nav__list-language">
+                            <li class="nav__item-language">
+                                <a class="nav__link-language d-block" href="#">English</a>
+                            </li>
+
+                            <li class="nav__item-language">
+                                <a class="nav__link-language d-block" href="#">Vietnamese</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {%- endif -%}
+        </div>
+        
+    </div>
+</div>
+
+
+{% schema %}
+    {
+        "name": "Header",
+        "tag": "header",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "link_list",
+                "id": "menu-header",
+                "default": "main-menu",
+                "label": "Menu"
+            },
+            {
+                "type": "header",
+                "content": "Search"
+            },
+            {
+                "type": "text",
+                "id": "input_search",
+                "default": "Search something here!",
+                "label": "Placeholder search"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_search",
+                "default": true,
+                "label": "Show search"
+            },
+            {
+                "type": "header",
+                "content": "Button"
+            },
+            {
+                "type": "text",
+                "id": "button_label_header",
+                "label": "Button label",
+                "default": "Join the community",
+                "info": "Leave the label blank to hide the button."
+            },
+            {
+                "type": "url",
+                "id": "button_link_header",
+                "label": "Button link"
+            },
+            {
+                "type": "checkbox",
+                "id": "button_header_style",
+                "default": false,
+                "label": "Use outline button style"
+            },
+            {
+                "type": "header",
+                "content": "Country/region selector",
+                "info": "To add a language, go to your [language settings.](https://admin.shopify.com/store/mpg-furniture/settings/languages)"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_country_selector",
+                "default": true,
+                "label": "Enable country/region selector"
+            }
+        ],
+        "blocks": []
+    }
+{% endschema %}
+

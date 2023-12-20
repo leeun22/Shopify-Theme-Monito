@@ -1,0 +1,15 @@
+{
+    "name": "theme_info",
+    "settings": [{
+            "type": "Logo",
+            "label": "My Logo",
+            "id": "logo"
+        },
+        {
+            "type": "color",
+            "label": "Color Schemes",
+            "id": "color_schemess",
+            "default": "#003459"
+        }
+    ]
+}

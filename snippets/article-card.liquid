@@ -1,0 +1,26 @@
+{%- if article and article != empty -%}  
+    <div class="card card-article">
+        {%- if show_image == true and article.image -%}
+            <div class="card__media o-hidden c-pointer">
+                {{ article.image | image_url: width: '500' | image_tag: class: 'd-block', widths: '264,320,450,550,750,1024,950,1200,1400,1600,2000', sizes: '(min-width: 350px) calc(100vw/2), (min-width:769px) calc(100vw/4), 100vw', loading: 'lazy', alt: 'Image blog posts' }}
+            </div>
+        {%- endif -%}
+
+
+        <div class="card-body card-body-blog">
+            {%- if show_badge == true and section.settings.bagde_blog_posts != blank -%}
+                <span class="blog-tag d-inline-block">
+                    {{ section.settings.bagde_blog_posts }}
+                </span>
+            {%- endif -%}
+            <h3 class="card-heading card-blog-heading">
+                <a class="text-content-main primary-text secondary-text-mobile" href="{{ article.url }}"> {{- article.title -}}</a>
+            </h3>
+            <p class="card-content card-content-heading">
+                {{ article.content }}
+            </p>
+        </div>
+    </div>
+{%- endif -%}
+
+

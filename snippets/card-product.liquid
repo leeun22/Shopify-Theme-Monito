@@ -1,0 +1,44 @@
+{%- if card_product and card_product != empty -%}           
+    <div class="card card-product d-grid">
+        <div class="card__media card__media-product o-hidden c-pointer">
+            {{ card_product.featured_image | image_url: width: '500' | image_tag: widths: '264,320,450,550,750,1024,950,1200,1400,1600,2000', sizes: '(min-width: 350px) calc(100vw/2), (min-width:769px) calc(100vw/4), 100vw', loading: 'lazy' }}
+        </div>
+
+        <div class="card-body card-body-product">
+            <h3 class="card-heading">
+                <a class="text-content-main primary-text secondary-text-mobile" href="{{ card_product.url }}"> {{- card_product.title -}} </a>
+            </h3>
+
+            <div class="product-info d-flex jc-start alt-center">                                   
+                <div class="product-info-title">
+                    <span class="pro-font-light">Gene:</span>
+                    <span class="product-info-title-bold">Male</span>
+                </div>
+
+                <span class="dot-grey d-none-mb581"></span>
+
+                <div class="product-info-attribute">
+                    <span class="pro-font-light">Age:</span>
+                    <span class="product-info-att-bold">02 months</span>
+                </div>
+            </div>                                 
+
+            <div class="text-content-main secondary-text primary-text-mobile">
+                {{- card_product.price | money -}}
+            </div>
+
+            {%- if show_cart_btn == true and section.settings.button_label_cart_collection != blank -%}
+                <button type="button" class="product-gift d-flex alt-center c-pointer b-none">
+                    {%- if section.settings.icon_image != blank -%}
+                        {{ section.settings.icon_image | image_url: width: '20' | image_tag: class: 'img-product-gift', sizes: '100vw', widths: '20,80,140,350', alt: 'gift icon', loading: 'lazy' }}
+                    {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'img-product-gift' }}
+                    {%- endif -%}
+                    <span class="dot-blue"></span>
+                    <span class="cont-gift"> {{ section.settings.button_label_cart_collection }} </span>
+                </button>
+            {%- endif -%}
+        </div>
+    </div>
+
+{%- endif -%}

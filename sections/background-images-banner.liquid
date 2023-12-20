@@ -1,0 +1,286 @@
+{% comment %}
+{% capture backgroundImage %}{{ section.settings.bg_images_banner | image_url: width: '1500' | image_tag: sizes: '100vw', widths: '350,414,600,1000,1500,2000' | asset_url | escape }}{% endcapture %}
+{% endcomment %}
+
+{% style %}
+    .section--banner-header {
+        /* background-image: url('{{ backgroundImage }}'); */
+        /* background-image: url('{{ section.settings.bg_images_banner | asset_url }}'); */
+        position: relative;
+    }
+    .background-image-banner {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .images-background {
+        width: 100%;
+    }
+    .content-banner-header {
+        position: relative;
+    }
+{% endstyle %}
+
+<div class="section--banner-header d-block jc-center o-hidden">
+    <div class="background-image-banner">
+        {%- if section.settings.bg_images_banner != blank -%}
+            {{ section.settings.bg_images_banner | image_url: width: '1440' | image_tag: class: 'images-background', sizes: '100vw', widths: '350,414,576,768,992,1024,1200,1400,2000' }}
+        {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'banner_placeholder-svg' }}
+        {%- endif -%}
+    </div>
+
+    <div class="container container--banner-header d-grid alt-end">
+        <div class="grid__content content-banner-header">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'heading' -%}
+                        <h1 class="heading heading-large-header heading-mobile-large-header {{ block.settings.heading_banner_size }}">
+                            {{ block.settings.heading_banner }}
+                        </h1>
+
+                    {%- when 'subheading' -%}
+                        <p class="heading sub-heading-header sub-heading-mobile-header {{block.settings.subheading_style_banner}}">
+                            {{ block.settings.subheading_banner }}
+                        </p>
+
+                    {%- when 'text' -%}
+                        <p class="text-content-banner primary-text third-text-mobile text-cont-bann-header-3 {{block.settings.text_style_banner}}">
+                            {{ block.settings.text_banner }}
+                        </p>
+
+                    {%- when 'buttons' -%}
+                        <div class="button-groups button-banner-header d-flex alt-center">
+                            <!-- Turn on one video -->
+                            {%- if block.settings.button_banner_1 != blank -%}
+                                <button type="button" class="button d-flex alt-center jc-center c-pointer {%- if block.settings.button_banner_style_1 %} button--outline {% else %} button--primary {%- endif -%} {%- if section.settings.button_placement == 'right' -%} button--reverse  {%- endif -%}">
+                                    <span class="button-title"> {{- block.settings.button_banner_1 -}} </span>
+                                    <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M10 9V15L15 12L10 9Z" fill="#003459" stroke="#003459" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> 
+                                </button>
+                            {%- endif -%}
+
+                            <!-- Link to explore -->
+                            {%- if block.settings.button_banner_2 != blank -%}
+                                <a class="button alt-center {% if block.settings.button_banner_style_2 %} button--outline {% else %} button--primary {%- endif -%}" {% if block.settings.button_link_2 == blank %} role="link" aria-disabled="true" {% else %} href="{{ block.settings.button_link_2 }}" {%- endif -%}>
+                                    <span class="button-title" > {{- block.settings.button_banner_2 -}} </span>
+                                </a>
+                            {%- endif -%}
+                        </div>
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+
+        {%- if section.settings.images_banner_1 != blank -%}
+            <div class="grid__images">
+                {{ section.settings.images_banner_1 | image_url: width: '500' | image_tag: class: 'img-banner-header', alt: 'Image banner', sizes: '100vw', widths: '350,414,576,768,992,1024,1200,1400,2000' }}
+            </div>
+        {%- endif -%}
+    </div>    
+</div>
+
+
+{% schema %}
+    {
+        "name": "Background banner",
+        "tag": "section",
+        "class": "section--banner",
+        "disabled_on": {
+            "groups": ["header", "footer"]
+        },
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "bg_images_banner",
+                "label": "Background image banner"
+            },
+            {
+                "type": "image_picker",
+                "id": "images_banner_1",
+                "label": "Image banner"
+            },
+            {
+                "type": "select",
+                "id": "button_placement",
+                "options": [
+                    {
+                        "value": "left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "right",
+                        "label": "Right"
+                    }
+                ],
+                "default": "left",
+                "label": "Button placement"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "heading",
+                "name": "Heading",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "inline_richtext",
+                        "id": "heading_banner",
+                        "default": "One more friend",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "select",
+                        "id": "heading_banner_size",
+                        "options": [
+                            {
+                                "value": "h2",
+                                "label": "Small"
+                            },
+                            {
+                                "value": "h1",
+                                "label": "Medium"
+                            },
+                            {
+                                "value": "h0",
+                                "label": "Large"
+                            }
+                        ],
+                        "default": "h1",
+                        "label": "Heading size"
+                    }
+                ]
+            },
+            {
+                "type": "subheading",
+                "name": "Sub Heading",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "inline_richtext",
+                        "id": "subheading_banner",
+                        "default": "Thousands more fun!",
+                        "label": "Decription"
+                    },
+                    {
+                        "type": "select",
+                        "id": "subheading_style_banner",
+                        "options": [
+                            {
+                                "value": "body",
+                                "label": "Body"
+                            },
+                            {
+                                "value": "subtitle",
+                                "label": "Subtitle"
+                            },
+                            {
+                                "value": "caption-with-letter-spacing",
+                                "label": "Uppercase"
+                            }
+                        ],
+                        "default": "body",
+                        "label": "Text style"
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "name": "Text",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "inline_richtext",
+                        "id": "text_banner",
+                        "default": "Having a pet means you have more joy, a new friend, a happy person who will always be with you to have fun. We have 200+ different pets that can meet your needs!",
+                        "label": "Decription"
+                    },
+                    {
+                        "type": "select",
+                        "id": "text_style_banner",
+                        "options": [
+                            {
+                                "value": "body",
+                                "label": "Body"
+                            },
+                            {
+                                "value": "subtitle",
+                                "label": "Subtitle"
+                            },
+                            {
+                                "value": "caption-with-letter-spacing",
+                                "label": "Uppercase"
+                            }
+                        ],
+                        "default": "body",
+                        "label": "Text style"
+                    }
+                ]
+            },
+            {
+                "type": "buttons",
+                "name": "Buttons",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "button_banner_1",
+                        "default": "View Intro",
+                        "label": "First button label",
+                        "info": "Leave the label blank to hide the button."
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link_1",
+                        "label": "First button link"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "button_banner_style_1",
+                        "default": true,
+                        "label": "Use outline button style"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_banner_2",
+                        "default": "Explore Now",
+                        "label": "Second button label",
+                        "info": "Leave the label blank to hide the button."
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link_2",
+                        "label": "Second button link"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "button_banner_style_2",
+                        "default": false,
+                        "label": "Use outline button style"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Background banner",
+                "blocks": [
+                    {
+                        "type": "heading"
+                    },
+                    {
+                        "type": "subheading"
+                    },
+                    {
+                        "type": "text"
+                    },
+                    {
+                        "type": "buttons"
+                    }
+                ]
+            }
+        ]
+    }
+ 
+{% endschema %}

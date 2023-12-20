@@ -1,0 +1,251 @@
+<div class="section section-footer">
+    <div class="container container-footer d-flex f-direction-col jc-end alt-start">
+        <div class="register-contact d-flex f-direction-col alt-start">
+
+            {%- if section.settings.show_email_signup == true -%}
+                <div class="register-form d-flex alt-start">
+                    {%- for block in section.blocks -%}
+                        {%- case block.type -%}
+                            {%- when 'email_signup' -%}
+                                {%- if block.settings.heading_email != blank -%}
+                                    <h2 class="heading heading-small cont-form-register heading-small-mobile c-pointer"> {{ block.settings.heading_email }} </h2>
+                                {%- endif -%}
+
+                                {%- form 'customer', class: 'form-your-email' -%}
+                                    <div class="d-flex gap-column-12 jc-space-between alt-center">
+                                        <input type="email" name="contact[email]" class="input-email d-flex alt-center ol-none" placeholder="{{ block.settings.placeholder_input_email }}" autocomplete="email" aria-required="true" autocorrect="off" required>
+                                        
+                                        {%- if block.settings.button_label_email != blank -%}
+                                            <button type="submit" aria-label="Subcribe Now" class="btn-subcribe d-flex jc-center alt-center c-pointer b-none">{{ block.settings.button_label_email }}</button>
+                                        {% else %}
+                                            <button type="submit" aria-label="Subcribe Now" class="btn-subcribe d-flex jc-center alt-center c-pointer b-none">{% render 'icon-arrow' %}</button>
+                                        {%- endif -%}
+                                    </div>
+                                {%- endform -%}
+                        {%- endcase -%}
+                    {%- endfor -%}
+                </div>
+            {%- endif -%}
+
+            <div class="info-contact d-flex f-wrap jc-space-between alt-start">
+                {%- if section.settings.menu-footer != blank -%}
+                    <div class="info d-flex alt-start">
+                        {%- for link in section.settings.menu-footer.links -%}
+                            <a class="info-content" href="{{ link.url }}">{{ link.title }}</a>
+                        {%- endfor -%}
+                    </div>
+                {%- else -%}
+                    <div class="info d-flex alt-start">
+                        {%- for link in linklists.footer.links -%}
+                            <a class="info-content" href="{{ link.url }}">{{ link.title }}</a>
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+            
+                <div class="contact d-flex alt-center">
+                    {%- if section.settings.icon_social_1 != blank -%}
+                        <a href="{{ section.settings.icon_social_link_1 }}">
+                            {{ section.settings.icon_social_1 | image_url: width: '24' | image_tag: class: 'image_icon_social', sizes: '100vw', widths: '20,24,36,48,64', loading: 'lazy', alt: 'Social icon' }}
+                        </a>
+                    {%- endif -%}
+
+                    {%- if section.settings.icon_social_2 != blank -%}
+                        <a href="{{ section.settings.icon_social_link_2 }}">
+                            {{ section.settings.icon_social_2 | image_url: width: '24' | image_tag: class: 'image_icon_social', sizes: '100vw', widths: '20,24,36,48,64', loading: 'lazy', alt: 'Social icon' }}
+                        </a>
+                    {%- endif -%}
+
+                    {%- if section.settings.icon_social_3 != blank -%}
+                        <a href="{{ section.settings.icon_social_link_3 }}">
+                            {{ section.settings.icon_social_3 | image_url: width: '24' | image_tag: class: 'image_icon_social', sizes: '100vw', widths: '20,24,36,48,64', loading: 'lazy', alt: 'Social icon' }}
+                        </a>
+                    {%- endif -%}
+
+                    {%- if section.settings.icon_social_4 != blank -%}
+                        <a href="{{ section.settings.icon_social_link_4 }}">
+                            {{ section.settings.icon_social_4 | image_url: width: '24' | image_tag: class: 'image_icon_social', sizes: '100vw', widths: '20,24,36,48,64', loading: 'lazy', alt: 'Social icon' }}
+                        </a>
+                    {%- endif -%} 
+                </div>
+            </div>
+        </div>
+
+        <div class="content-footer d-flex f-wrap jc-space-between alt-center">
+            {%- if section.settings.text_1 != blank -%}
+                <div class="coppyright">{{ section.settings.text_1 }}</div>
+            {%- endif -%}
+    
+            {%- if section.settings.image_logo_brand != blank -%}
+                <div class="logo logo-footer c-pointer">
+                    <a class="img-logo d-block" href="{{ shop.url}}"> 
+                        {%- if section.settings.image_logo_brand != blank -%} 
+                            {{ section.settings.image_logo_brand | image_url: width: '115' | image_tag: size: '100vw', widths: '115,250', alt: 'Logo brand' }} 
+                        {% else %} 
+                            <span class="no-logo"> {{ shop.name }} </span> 
+                        {% endif %}
+                    </a>
+                </div>
+            {%- endif -%}
+
+            <div class="terms-privacy d-flex">
+                {%- if section.settings.text_2 != blank -%}
+                    <a class="terms-privacy-content" href="{{ section.settings.link_text_2 }}">{{section.settings.text_2 }}</a>
+                {%-endif -%}
+
+                {%- if section.settings.text_3 != blank -%}
+                    <a class="terms-privacy-content" href="{{ section.settings.link_text_3 }}">{{section.settings.text_3 }}</a>
+                {%-endif -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%- schema -%} 
+    {
+        "name": "Footer",
+        "tag": "footer",
+        "settings": [
+            {
+                "type": "inline_richtext",
+                "id": "text_1",
+                "default": "© 2022 Monito. All rights reserved.",
+                "label": "Text 1"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "text_2",
+                "default": "Terms of Service",
+                "label": "Text 2"
+            },
+            {
+                "type": "url",
+                "id": "link_text_2",
+                "label": "Text link 2"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "text_3",
+                "default": "Privacy Policy",
+                "label": "Text 3"
+            },
+            {
+                "type": "url",
+                "id": "link_text_3",
+                "label": "Text link 3"
+            },
+            {
+                "type": "link_list",
+                "id": "menu-footer",
+                "default": "footer",
+                "label": "Menu",
+                "info": "Displays only top-level menu items."
+            },
+            {
+                "type": "header",
+                "content": "Email signup",
+                "info": "Subscribers added automatically to your “accepted marketing” customer list. [Learn more](https://help.shopify.com/vi/manual/customers/manage-customers)"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_email_signup",
+                "default": true,
+                "label": "Show email signup"
+            },
+            {
+                "type": "header",
+                "content": "Image social"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_social_1",
+                "label": "Social 1"
+            },
+            {
+                "type": "url",
+                "id": "icon_social_link_1",
+                "label": "Social link 1"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_social_2",
+                "label": "Social 2"
+            },
+            {
+                "type": "url",
+                "id": "icon_social_link_2",
+                "label": "Social link 2"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_social_3",
+                "label": "Social 3"
+            },
+            {
+                "type": "url",
+                "id": "icon_social_link_3",
+                "label": "Social link 3"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_social_4",
+                "label": "Social 4"
+            },
+            {
+                "type": "url",
+                "id": "icon_social_link_4",
+                "label": "Social link 4"
+            },
+            {
+                "type": "header",
+                "content": "Logo brand"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_logo_brand",
+                "label": "Logo"
+            },
+            {
+                "type": "url",
+                "id": "link_logo_brand",
+                "label": "Link logo"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "email_signup",
+                "name": "Email signup",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "inline_richtext",
+                        "id": "heading_email",
+                        "default": "Register now so you don't miss our programs",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "inline_richtext",
+                        "id": "placeholder_input_email",
+                        "default": "Enter your Email",
+                        "label": "Placeholder input"
+                    },
+                    {
+                        "type": "inline_richtext",
+                        "id": "button_label_email",
+                        "default": "Subcribe Now",
+                        "label": "Button label"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Footer",
+                "blocks": [
+                    {
+                        "type": "email_signup"
+                    }
+                ]
+            }
+        ]
+    }
+{%- endschema -%}

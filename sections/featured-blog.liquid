@@ -1,0 +1,218 @@
+<div class="section--card-product">
+    <div class="container container-blog-post-list">
+        <div class="section-header d-flex alt-center f-wrap jc-space-between alt-center">
+            <div class="section-heading jc-start">
+                {%- if section.settings.subheading_blog_posts != blank -%}
+                    <span class="subheading primary-text secondary-text-mobile">
+                        {{- section.settings.subheading_blog_posts -}}
+                    </span>
+                {%- endif -%}
+
+                {%- if section.settings.heading_blog_posts != blank -%}
+                    <h2 class="heading heading-small heading-small-mobile c-pointer"> <a href="{{ section.settings.selected_blog_posts.url }}">{{- section.settings.heading_blog_posts -}}</a> </h2>
+                    {%- else -%}
+                        <h2 class="heading heading-small heading-small-mobile c-pointer"> 
+                            <a href="{{ section.settings.selected_blog_posts.url }}">{{section.settings.selected_blog_posts}}</a> 
+                        </h2>
+                {%- endif -%}
+            </div>
+
+            
+            {%- if section.settings.button_label_blog_posts != blank -%}
+                <div class="section-header__view-more d-inline-flex d-none-mb581">
+                    <a {% if section.settings.button_link_blog_posts != blank %} href="{{ section.settings.button_link_blog_posts }}" {% else %} role="link" aria-disabled="true" {%- endif -%} class="button d-flex jc-center alt-center {%- if section.settings.button_blog_posts_style %} button--outline {% else %} button--primary {%- endif -%}">
+                        <span class="secondary-text primary-text-mobile"> {{- section.settings.button_label_blog_posts -}} </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M8.33398 6.66669L11.6673 10L8.33398 13.3334" stroke="#003459" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            {%- endif -%}
+        </div>
+
+        <div class="section--card">
+            <div class="grid d-flex f-wrap">
+                {%- if section.settings.selected_blog_posts != blank -%}
+                    {% comment %} Lấy ra lần lượt các article trong tất cả các articles từ tất cả các blogs có handle id "selected_blog_posts"  {% endcomment %}
+                    {%- for article in blogs[section.settings.selected_blog_posts].articles -%}
+                        <div class="grid__item grid__item-blog">
+                            {% render 'article-card',
+                                article: article,
+                                show_image: section.settings.show_image,
+                                show_badge: section.settings.show_badge
+                            %}
+                        </div>
+                    {%- endfor -%}
+                    
+                {%- else -%}
+                    <div class="grid__item grid__item-blog">
+                        <div class="card card-article">
+                            {%- if section.settings.show_image == true -%}
+                                <div class="card__media o-hidden c-pointer">
+                                    {{ 'blog-apparel-1' | placeholder_svg_tag: 'blog-placeholder-svg' }}
+                                </div>
+                            {%- endif -%}
+                    
+                            <div class="card-body card-body-blog">
+                                {%- if section.settings.show_badge == true -%}
+                                    <span class="blog-tag d-inline-block">
+                                        Blog badge
+                                    </span>
+                                {%- endif -%}
+                                <h3 class="card-heading card-blog-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#">Blog post</a>
+                                </h3>
+                                <p class="card-content card-content-heading">
+                                    Give your customers a summary of your blog post
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item grid__item-blog">
+                        <div class="card card-article">
+                            {%- if section.settings.show_image == true -%}
+                                <div class="card__media o-hidden c-pointer">
+                                    {{ 'blog-apparel-2' | placeholder_svg_tag: 'blog-placeholder-svg' }}
+                                </div>
+                            {%- endif -%}
+                    
+                            <div class="card-body card-body-blog">
+                                 {%- if section.settings.show_badge == true -%}
+                                    <span class="blog-tag d-inline-block">
+                                        Blog badge
+                                    </span>
+                                {%- endif -%}
+                                <h3 class="card-heading card-blog-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#">Blog post</a>
+                                </h3>
+                                <p class="card-content card-content-heading">
+                                    Give your customers a summary of your blog post
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid__item grid__item-blog">
+                        <div class="card card-article">
+                            {%- if section.settings.show_image == true -%}
+                                <div class="card__media o-hidden c-pointer">
+                                    {{ 'blog-apparel-3' | placeholder_svg_tag: 'blog-placeholder-svg' }}
+                                </div>
+                            {%- endif -%}
+                    
+                            <div class="card-body card-body-blog">
+                                {%- if section.settings.show_badge == true -%}
+                                    <span class="blog-tag d-inline-block">
+                                        Blog badge
+                                    </span>
+                                {%- endif -%}
+                                <h3 class="card-heading card-blog-heading">
+                                    <a class="text-content-main primary-text secondary-text-mobile" href="#">Blog post</a>
+                                </h3>
+                                <p class="card-content card-content-heading">
+                                    Give your customers a summary of your blog post
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+                    
+        <!-- Button view-more-mobile -->
+        {%- if section.settings.button_label_blog_posts != blank -%}
+            <div class="section-header__view-more section-header__view-more-mobile d-none jc-center">
+                <a {% if section.settings.button_link_blog_posts == blank %} role="link" aria-disabled="true" {% else %} href="{{ block.settings.button_link_blog_posts }}" {%- endif -%} class="button d-flex jc-center alt-center {%- if section.settings.button_blog_posts_styles %} button--outline {% else %} button--primary {%- endif -%}">
+                    <span>{{- section.settings.button_label_blog_posts -}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M8.33398 6.66669L11.6673 10L8.33398 13.3334" stroke="#003459" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        {%- endif -%}
+
+    </div>
+</div>
+
+{% schema %} 
+    {    
+        "name": "Blog posts",
+        "tag": "section",
+        "disabled_on": {
+            "groups": ["header", "footer"]
+        },
+        "settings": [
+            {
+                "type": "inline_richtext",
+                "id": "subheading_blog_posts",
+                "default": "You already know ?",
+                "label": "Subheading"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "heading_blog_posts",
+                "default": "Useful pet knowledge",
+                "label": "Heading"
+            },
+            {
+                "type": "blog",
+                "id": "selected_blog_posts",
+                "label": "Blog"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_image",
+                "default": true,
+                "label": "Show featured image",
+                "info": "For best results, use an image with a 3:2 aspect ratio. [Learn more](https://help.shopify.com/vi/manual/shopify-admin/productivity-tools/image-editor#understanding-image-aspect-ratio)"
+                },
+            {
+                "type": "header",
+                "content": "Button"
+            },
+            {
+                "type": "text",
+                "id": "button_label_blog_posts",
+                "label": "Button label",
+                "default": "View more",
+                "info": "Leave the label blank to hide the button."
+            },
+            {
+                "type": "url",
+                "id": "button_link_blog_posts",
+                "label": "Button link"
+            },
+            {
+                "type": "checkbox",
+                "id": "button_blog_posts_style",
+                "default": true,
+                "label": "Use outline button style"
+            },
+            {
+                "type": "header",
+                "content": "Bagde"
+            },
+            {
+                "type": "text",
+                "id": "bagde_blog_posts",
+                "label": "Badge label",
+                "default": "Pet knowledge",
+                "info": "Leave the label blank to hide the button."
+            },
+            {
+                "type": "checkbox",
+                "id": "show_badge",
+                "default": false,
+                "label": "Show badge"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Blog posts"
+            }
+        ]
+    }
+{% endschema %}

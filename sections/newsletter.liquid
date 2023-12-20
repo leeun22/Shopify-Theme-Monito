@@ -1,0 +1,97 @@
+<div class="container container-footer d-flex f-direction-col jc-end alt-start">
+    <div class="register-contact d-flex f-direction-col alt-start">
+        <div class="register-form d-flex alt-start">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'heading' -%}
+                        {%- if block.settings.heading_email != blank -%}
+                            <h2 class="heading heading-small cont-form-register heading-small-mobile c-pointer"> {{ block.settings.heading_email }} </h2>
+                        {%- endif -%}
+                    
+                    {%- when 'email_form' -%}
+                        {%- form 'customer', class: 'form-your-email' -%}
+                            <div class="d-flex gap-column-12 jc-space-between alt-center">
+                                <input type="email" name="contact[email]" class="input-email d-flex alt-center ol-none" placeholder="{{ block.settings.placeholder_input_email }}" autocomplete="email" aria-required="true" autocorrect="off" required>
+                                
+                                {%- if block.settings.button_label_email != blank -%}
+                                    <button type="submit" aria-label="Subcribe Now" class="btn-subcribe d-flex jc-center alt-center c-pointer b-none">{{ block.settings.button_label_email }}</button>
+                                {% else %}
+                                    <button type="submit" aria-label="Subcribe Now" class="btn-subcribe d-flex jc-center alt-center c-pointer b-none">{% render 'icon-arrow' %}</button>
+                                {%- endif -%}
+                            </div>
+                        {%- endform -%}
+                        
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Email signup",
+    "tag": "section",
+    "disabled_on": {
+        "groups": ["header"]
+    },
+    "settings": [
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Color scheme",
+            "default": "scheme-1"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "heading",
+            "name": "Heading",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "inline_richtext",
+                    "id": "heading_email",
+                    "default": "Register now so you don't miss our programs",
+                    "label": "Heading"
+                }
+            ]
+        },
+        {
+            "type": "email_form",
+            "name": "Email form",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Email"
+                },
+                {
+                    "type": "inline_richtext",
+                    "id": "placeholder_input_email",
+                    "default": "Enter your Email",
+                    "label": "Placeholder input"
+                },
+                {
+                    "type": "inline_richtext",
+                    "id": "button_label_email",
+                    "default": "Subcribe Now",
+                    "label": "Button label"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Email signup",
+            "blocks": [
+                {
+                    "type": "heading"
+                },
+                {
+                    "type": "email_form"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
